@@ -30,12 +30,12 @@ $cd /home/projects/cu_10160/people/elehos
 
 ## Required tools
 
-1. **Mambaforge:** ~~Information how to install `conda` and add the `bioconda` channel is available on https://bioconda.github.io/.~~ [!TODO] add a description for Mambaforge
-   - [!TODO] add the command here
+1. **Mambaforge:** ~~Information how to install `conda` and add the `bioconda` channel is available on https://bioconda.github.io/.~~ :bookmark: [TODO] add a description for Mambaforge
+   - `#green` `#ff5500` :bookmark: [TODO] add the command here
 
-1. **PBHoney** [!TODO] Did I download & install it as a standalone package, or did I include it as a Conda dependency?!
+1. **PBHoney** :bookmark: [TODO] Did I download & install it as a standalone package, or did I include it as a Conda dependency?!
 
-1. [!TODO] add other tools, if any
+1. :bookmark: [TODO] add other tools, if any
 
 
 ## Environment setup
@@ -51,7 +51,7 @@ $cd /home/projects/cu_10160/people/elehos
    `$ conda activate pbhoney-env`
 
 1. **Create the environment.yaml file**: Specify the configuration of a Conda environment, including packages and dependencies.
-   ```
+   ```yaml
    channels:
    - conda-forge
    - bioconda
