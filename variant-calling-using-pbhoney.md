@@ -127,7 +127,60 @@ The task will run with the following inputs
 
    The current version used is `Minimap2 2.28-r1209`.
 
-   To run jobs in the HPC environment, it is necessary to submit jobs to a queueing system.
+   To run jobs in the HPC environment, it is necessary to submit jobs to a queueing system. The HPC environment queueing system shares compute resources fairly and efficiently among users and schedules when jobs should run. I have included a job submission script below. This script is crucial for the effective execution of tasks within the HPC environment.
+
+   ```
+   #!/bin/bash
+   ### Account information
+   #PBS -W group_list=cu_10160 -A cu_10160
+   ### Job name
+   #PBS -N minimap2
+   ###Output files
+   #PBS -e minimap2.err
+   #PBS -o minimap2.log
+   ### Only send mail when job is aborted or terminates abnormally
+   #PBS -m n
+   ### Number of nodes
+   #PBS -l nodes=1:ppn=8
+   ### Memory
+   #PBS -l mem=40gb
+   ###Requesting time
+   #PBS -l walltime=12:00:00
+
+   echo "Working direcory is $PBS_O_WORKDIR"
+   cd $PBS_O_WORKDIR
+
+   ### Here follows the user commands:
+   # Define number of processors
+   NPROCS=`wc -l < $PBS_NODEFILE`
+   echo This job has allocated $NPROCS nodes
+
+   ### This ensures that any environment variables, aliases, or functions defined$
+   source ~/.bashrc
+   
+   #echo pwd: $(pwd)
+   #echo 'Testing Queue Submission!' > ./testing.out
+
+   # Prepare the environment
+   conda activate pbhoney-env
+
+   # Execute your command (e.g., minimap2 command)
+   minimap2 -ax map-hifi GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta HG002_35x_PacBio_14kb-15kb.fastq.gz > output.sam
+   
+   ```
+
+
+
+### Here follows the user commands:
+# Define number of processors
+NPROCS=`wc -l < $PBS_NODEFILE`
+echo This job has allocated $NPROCS nodes
+
+### This ensures that any environment variables, aliases, or functions defined$
+source ~/.bashrc
+
+
+
    
    :bookmark: [TODO]  qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./run_minimap2.sh
 1. Extract chromosome number 6
