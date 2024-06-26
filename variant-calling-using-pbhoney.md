@@ -129,7 +129,7 @@ The task will run with the following inputs
 
    To run jobs in the HPC environment, it is necessary to submit jobs to a queueing system.
    
-   :bookmark: [TODO] qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./run_minimap2.sh
+   :bookmark: [TODO]  qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./run_minimap2.sh
 1. Extract chromosome number 6
 
 1. Runing PBHoney 
