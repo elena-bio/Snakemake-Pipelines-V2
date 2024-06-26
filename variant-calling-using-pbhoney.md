@@ -169,20 +169,13 @@ The task will run with the following inputs
    
    ```
 
-
-
-### Here follows the user commands:
-# Define number of processors
-NPROCS=`wc -l < $PBS_NODEFILE`
-echo This job has allocated $NPROCS nodes
-
-### This ensures that any environment variables, aliases, or functions defined$
-source ~/.bashrc
-
-
-
+   $ qsub -W group_list=<group_name_found_in_step#1> -A <group_name_found_in_step#1> -l nodes=1:ppn=1,mem=4gb, walltime=01:00:00 <your script>`
    
-   :bookmark: [TODO]  qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./run_minimap2.sh
+   usage command
+   ```
+   $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./run_minimap2.sh
+
+   ```
 1. Extract chromosome number 6
 
 1. Runing PBHoney 
