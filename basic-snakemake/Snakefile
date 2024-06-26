@@ -1,7 +1,7 @@
 SAMPLE = ["A","B"]
 
 rule all:
-    input:"plots/quals.svg"
+    input:"output/plots/quals.svg"
 
 rule bwa_map:
     input:
