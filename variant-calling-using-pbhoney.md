@@ -106,7 +106,8 @@ The task will run with the following inputs
 1. Upon review, I have decided to address and fix the issue directly in the source code and I have added a `continue` statement to the loop to bypass instances of bad data with an empty CIGAR string.
 
    ![alt text](<CIGAR-error.jpeg>)
-
+   
+1. 
 
 ## Generating a VCF File from a New Input Dataset using PBHoney
 
