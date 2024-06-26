@@ -8,15 +8,15 @@ rule bwa_map:
         "data/genome.fa",
         "data/samples/{sample}.fastq"
     output:
-        "mapped_reads/{sample}.bam"
+        "output/mapped_reads/{sample}.bam"
     shell:
         "bwa mem {input} | samtools view -Sb - > {output}"
         
 rule samtools_sort:
     input:
-        "mapped_reads/{sample}.bam"
+        "output/mapped_reads/{sample}.bam"
     output:
-        "sorted_reads/{sample}.bam"
+        "output/sorted_reads/{sample}.bam"
     shell:
        "samtools sort -T sorted_reads/{wildcards.sample} "
         "-O bam {input} > {output}"
@@ -24,9 +24,9 @@ rule samtools_sort:
 
 rule samtools_index:
     input:
-        "sorted_reads/{sample}.bam"
+        "output/sorted_reads/{sample}.bam"
     output:
-        "sorted_reads/{sample}.bam.bai"
+        "output/sorted_reads/{sample}.bam.bai"
     shell:
         "samtools index {input}"
 
@@ -34,8 +34,8 @@ rule samtools_index:
 rule bcftools_call: 
     input:
         fa="data/genome.fa",
-        bam=expand("sorted_reads/{sample}.bam", sample=SAMPLE),
-        bai=expand("sorted_reads/{sample}.bam.bai", sample=SAMPLE)
+        bam=expand("output/sorted_reads/{sample}.bam", sample=SAMPLE),
+        bai=expand("outpu/sorted_reads/{sample}.bam.bai", sample=SAMPLE)
     output:
         "calls/all.vcf"
     shell:
