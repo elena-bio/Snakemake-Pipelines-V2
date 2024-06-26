@@ -3,7 +3,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from pysam import VariantFile
 
-quals = [record.qual for record in VariantFile("calls/all.vcf")]
+quals = [record.qual for record in VariantFile("output/calls/all.vcf")]
 plt.hist(quals)
 
-plt.savefig("plots/quals.svg")
+plt.savefig("output/plots/quals.svg")
