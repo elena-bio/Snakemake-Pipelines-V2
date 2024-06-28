@@ -107,7 +107,10 @@ The task will run with the following inputs
 
    ![alt text](<CIGAR-error.jpeg>)
    
-1. 
+1. I ran the code again after fixing the issue, but I got this error : Can not convert non-pacbio reads to pbbam record.
+
+   ![Image 2024-06-16 at 23 18 48](https://github.com/elena-bio/snakemake-pipelines-v2/assets/166811346/7d722ca1-b924-4639-98f5-1fbcfe1f60ee)
+
 
 ## Generating a VCF File from a New Input Dataset using PBHoney
 
@@ -180,4 +183,6 @@ The task will run with the following inputs
 
 1. Runing PBHoney 
 
-1. Runing PBHoney Tool for Variant Calling 
+1. Runing PBHoney Tool for Variant Calling
+   
+1. Runing Sniffles Tool for Variant Calling 
