@@ -9,7 +9,7 @@ For a comprehensive introduction and installation of Snakemake, refer to the off
 
 1. Create a directory for the task
 
-   $ mkdir Newdataset
+   $ mkdir Snakemak
 
 1. Checking directory creation with 'ls' command.
 
