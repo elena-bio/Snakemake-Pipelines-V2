@@ -37,7 +37,7 @@ For more information about the Computerome server, refer to this [link](https://
 
 usage command
 ```
-   $ nano Snakemake
+   $ nano Snakefile
 ```
 
 ### Reads alignment
