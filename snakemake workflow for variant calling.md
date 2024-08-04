@@ -126,6 +126,10 @@ To execute the `snakemake.sh` script, I used the following command in terminal:
 ```
 $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./snakemake.sh
 ```
+To check the status of the job that has been submitted 
+```
+qstat -a; ll -h
+```
 
 ### Converting sam file to bam file
 
