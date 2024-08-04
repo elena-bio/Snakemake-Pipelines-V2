@@ -286,5 +286,5 @@ rule samtools_extract:
 
 ### Runing pbhoney for variant calling 
 
-### Runing snifles for variant calling
+### Runing sniffles for variant calling
 
