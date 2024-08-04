@@ -233,10 +233,55 @@ rule samtools_index:
     shell:
         "samtools index {input}"
 
-
 ```
 
 ### Extracting chromosome 6 
+
+```
+rule all:
+    input:
+        "outputs/chromosome6.bam"
+
+rule minimap2:
+    input:
+        HGOO2="HG002_35x_PacBio_14kb-15kb.fastq.gz",
+        ref="GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta"
+    output:
+        "outputs/output.sam"
+    shell:
+        "minimap2 -ax map-hifi {input.ref} {input.HGOO2} > {output}"
+rule sam_to_bam:
+    input:
+        "outputs/output.sam"
+    output:
+        "outputs/output.bam"
+    shell:
+        "samtools view -bS {input} > {output}"
+rule samtools_sort:
+    input:
+        "outputs/output.bam"
+    output:
+        "outputs/sorted.bam"
+    shell:
+        "samtools sort -T outputs/sorted -O bam {input} > {output}"
+rule samtools_index:
+    input:
+        "outputs/sorted.bam"
+    output:
+        "outputs/sorted.bam.bai"
+    shell:
+        "samtools index {input}"
+rule samtools_extract:
+    input:
+        bam="outputs/sorted.bam",
+        bai="outputs/sorted.bam.bai"
+    output:
+        "outputs/chromosome6.bam"
+    shell:
+        "samtools view -b {input.bam} chr6 > {output}"
+
+```
+
 
 ### Runing pbhoney for variant calling 
 
