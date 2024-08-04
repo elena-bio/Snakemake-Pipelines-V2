@@ -21,14 +21,17 @@ For more information about the Computerome server, refer to this [link](https://
 ## Sample data
 
 1. Create a directory for the task
-
+```
    $ mkdir Snakemak
+```
 
 1. Download the new dataset from this link https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9205427/#sec4.3.2.
    
 1. Synchronize the input files using `rsync`: To do this between your local machine and the remote server use the following command:
 
+```
    `$ rsync "/path/to/local/directory/" user@transfer.computerome.dk:/path/to/remote/directory/
+```
 
 * prepared bam file and refrence genome fasta file 
 * HG002_35x_PacBio_14kb-15kb.fastq.gz and refrence genome fasta file
@@ -119,10 +122,14 @@ conda activate snakemake-env
 snakemake --cores 40 
 
 ```
+To execute the `snakemake.sh` script, I used the following command in terminal:
+```
+$ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./snakemake.sh
+```
 
 ### Converting sam file to bam file
 
-The second rule converts a SAM file to a BAM file . To speeds up processing, saves space, and allows for quick access to specific data regions
+The second rule converts a SAM file to a BAM file . To speeds up processing, saves space, and allows for quick access to specific data regions.
 
 usage command
 ```
@@ -147,11 +154,83 @@ rule sam_to_bam:
         "samtools view -bS {input} > {output}"
 
 ```
-
+To get the desired output, I executed the `snakemake.sh` script again using the command above.
 
 ### Sorting read alignments
 
+For later steps, we need the read alignments in the BAM files to be sorted. This can be achieved with the **samtools** `sort` command.
+
+```
+rule all:
+    input:
+        "outputs/sorted.bam"
+
+rule minimap2:
+    input:
+        HGOO2="HG002_35x_PacBio_14kb-15kb.fastq.gz",
+        ref="GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta"
+    output:
+        "outputs/output.sam"
+    shell:
+        "minimap2 -ax map-hifi {input.ref} {input.HGOO2} > {output}"
+rule sam_to_bam:
+    input:
+        "outputs/output.sam"
+    output:
+        "outputs/output.bam"
+    shell:
+        "samtools view -bS {input} > {output}"
+rule samtools_sort:
+    input:
+        "outputs/output.bam"
+    output:
+        "outputs/sorted.bam"
+    shell:
+        "samtools sort -T outputs/sorted -O bam {input} > {output}"
+
+```
+
 ### Indexing read alignment 
+
+Next, we need to use `samtools` again to index the sorted read alignments so that we can quickly access reads by the genomic location they were mapped to. This can be done with the following rule:
+
+```
+rule all:
+    input:
+        "outputs/sorted.bam.bai"
+
+rule minimap2:
+    input:
+        HGOO2="HG002_35x_PacBio_14kb-15kb.fastq.gz",
+        ref="GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta"
+    output:
+        "outputs/output.sam"
+    shell:
+        "minimap2 -ax map-hifi {input.ref} {input.HGOO2} > {output}"
+rule sam_to_bam:
+    input:
+        "outputs/output.sam"
+    output:
+        "outputs/output.bam"
+    shell:
+        "samtools view -bS {input} > {output}"
+rule samtools_sort:
+    input:
+        "outputs/output.bam"
+    output:
+        "outputs/sorted.bam"
+    shell:
+        "samtools sort -T outputs/sorted -O bam {input} > {output}"
+rule samtools_index:
+    input:
+        "outputs/sorted.bam"
+    output:
+        "outputs/sorted.bam.bai"
+    shell:
+        "samtools index {input}"
+
+
+```
 
 ### Extracting chromosome 6 
 
