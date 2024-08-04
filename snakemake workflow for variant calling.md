@@ -7,7 +7,7 @@ For a comprehensive introduction and installation of Snakemake, refer to the off
 
 ## Environment setup
 
-## Example data
+## Sample data
 
 1. Create a directory for the task
 
@@ -26,7 +26,7 @@ For a comprehensive introduction and installation of Snakemake, refer to the off
 
 ### Indexing read alignment 
 
-### Extracting chromosome6 
+### Extracting chromosome 6 
 
 ### Runing pbhoney for variant calling 
 
