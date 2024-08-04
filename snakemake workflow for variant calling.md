@@ -54,6 +54,8 @@ rule minimap2:
 
 ### Converting sam file to bam file
 
+The second rule converts a SAM file to a BAM file . To speeds up processing, saves space, and allows for quick access to specific data regions
+
 
 
 usage command
