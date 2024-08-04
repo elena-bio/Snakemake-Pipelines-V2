@@ -31,11 +31,16 @@ usage command
 
 The first Snakemake rule maps reads of a given sample to a given reference genome. For alignment, I used the tool minimap2. In the Snakefile, I defined the following rule:
 
+Snakemake accepts rule names as targets if the requested rule does not include wildcards, providing flexibility in specifying targets. To manage all desired results efficiently, a rule named **all** can be defined at the top of the workflow, including all typically desired target files as input files.
+
+
+
 usage command
 ```
 rule all:
     input:
         "outputs/output.sam"
+
 rule minimap2:
     input:
         HGOO2="HG002_35x_PacBio_14kb-15kb.fastq.gz",
@@ -48,6 +53,33 @@ rule minimap2:
 ```
 
 ### Converting sam file to bam file
+
+
+
+usage command
+```
+rule all:
+    input:
+        "outputs/output.bam"
+
+rule minimap2:
+    input:
+        HGOO2="HG002_35x_PacBio_14kb-15kb.fastq.gz",
+        ref="GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta"
+    output:
+        "outputs/output.sam"
+    shell:
+        "minimap2 -ax map-hifi {input.ref} {input.HGOO2} > {output}"
+rule sam_to_bam:
+    input:
+        "outputs/output.sam"
+    output:
+        "outputs/output.bam"
+    shell:
+        "samtools view -bS {input} > {output}"
+
+```
+
 
 ### Sorting read alignments
 
