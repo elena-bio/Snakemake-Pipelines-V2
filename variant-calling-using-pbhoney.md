@@ -1,5 +1,5 @@
 
-# Structural Variant Calling with PBHoney
+# Structural Variant Calling with PBHoney and Snifles
 
 _PBHoney_ is a tool used for detecting structural variants in DNA, helping researchers identify large-scale changes like deletions or insertions in genomes accurately and efficiently. It analyzes long-read sequencing data to pinpoint genetic differences that can impact health and disease studies.
 This guideline utilizes publicly available long-read sequencing data. Initially, I tried to use a prepared BAM file but encountered errors, as explained in the following steps. Instead, I used a new dataset for example PacBio HiFi long-read sequencing data from son of Ashkenazi Jewish ancestry (HG002). All steps and tools used have been included.
