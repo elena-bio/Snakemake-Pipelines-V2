@@ -9,10 +9,13 @@ For a comprehensive introduction and installation of Snakemake, refer to the off
 
 ## Connecting to Computerome Server 
 
+The disk quota of my personal home directory (`/home/people/user`) was 10 GB. But luckily Computerome provided me with another directory with much larger disk quota. Therefore, I changed the current working directory using this command:
+```
 To connect to the Computerome server, use the following command:
 ```
 $ ssh elehos@ssh.computerome.dk
 ```
+$cd /home/projects/cu_10160/people/elehos
 
 For more information about the Computerome server, refer to this [link](https://github.com/elena-bio/snakemake-pipelines-v2/blob/main/computerome%20server.md).
 
