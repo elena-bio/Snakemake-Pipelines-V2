@@ -114,7 +114,7 @@ The task will run with the following inputs
 
 ## Generating a VCF File from a New Input Dataset using PBHoney
 
-1. Alligning PacBio reads with `Minimap2` tool 
+1. **Reads alignment with `Minimap2` tool**
 
    `Minimap2` is a versatile alignment tool designed for mapping DNA or RNA sequence reads to a reference genome or for aligning long reads to each other.
    
@@ -174,11 +174,38 @@ The task will run with the following inputs
 
    $ qsub -W group_list=<group_name_found_in_step#1> -A <group_name_found_in_step#1> -l nodes=1:ppn=1,mem=4gb, walltime=01:00:00 <your script>`
    
-   usage command
+   usage command:
    ```
    $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./run_minimap2.sh
 
    ```
+
+1. **Converting sam file to bam file**
+ The second rule converts a SAM file to a BAM file . To speeds up processing, saves space, and allows for quick access to specific data regions.
+
+usage command in bash script:
+
+```
+# Execute your command (e.g., converting sam to bam command)
+samtools view -Sb output.sam > output.bam
+
+```
+I also chenged these comands in the bash script: 
+```
+###Output files
+#PBS -e sam_bam.err
+#PBS -o sam_bam.log
+```
+1. **Sorting read alignments**
+   
+For later steps, we need the read alignments in the BAM files to be sorted. This can be achieved with the **samtools** `sort` command.
+
+usage command in bash script:
+```
+# Execute your command (e.g., sorting sam to bam command)
+samtools sort output.bam -o sorted.bam
+```
+
 1. Extract chromosome number 6
 
 1. Runing PBHoney 
