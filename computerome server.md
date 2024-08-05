@@ -16,7 +16,4 @@ The following explanation is based on SSH via Terminal as a login service.
 1. Next, enter **the temporary password** you received via SMS. 
 1. Now you will receive an Entrust Identity mobile notification to confirm. 
 1. After you have confirmed the notification you will be logged into the HPC environment.
-
-The disk quota of my personal home directory (`/home/people/user`) was 10 GB. But luckily Computerome provided me with another directory with much larger disk quota. Therefore, I changed the current working directory using this command:
-```
-$cd /home/projects/cu_10160/people/elehos
+1. If you want to learn more about useful commands and additional information, refer to this link: [Computerome HPC Wiki](https://www.computerome.dk/wiki/high-performance-computing-hpc).
