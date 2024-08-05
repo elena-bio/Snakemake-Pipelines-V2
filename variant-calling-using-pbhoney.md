@@ -188,7 +188,6 @@ usage command in bash script:
 ```
 # Execute your command (e.g., converting sam to bam command)
 samtools view -Sb output.sam > output.bam
-
 ```
 I also chenged these comands in the bash script: 
 ```
@@ -205,10 +204,23 @@ usage command in bash script:
 # Execute your command (e.g., sorting sam to bam command)
 samtools sort output.bam -o sorted.bam
 ```
+i also chenged these commands in the bash script:
+```
+###Output files
+#PBS -e sort_bam.err
+#PBS -o sort_bam.log
+```
+### Indexing read alignment 
 
+Next, we need to use `samtools` again to index the sorted read alignments so that we can quickly access reads by the genomic location they were mapped to. This can be done with the following command:
+
+```
+# Execute your command (e.g., indexing sorted bam file command)
+samtools index sorted.bam
+```
 1. Extract chromosome number 6
 
-1. Runing PBHoney 
+ 
 
 1. Runing PBHoney Tool for Variant Calling
    
