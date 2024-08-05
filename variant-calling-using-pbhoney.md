@@ -179,6 +179,13 @@ The task will run with the following inputs
    $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./run_minimap2.sh
 
    ```
+   to check the status :
+   ```
+   $ qstat -a; ll -h
+
+   ```
+  
+
 
 1. **Converting sam file to bam file**
  The second rule converts a SAM file to a BAM file . To speeds up processing, saves space, and allows for quick access to specific data regions.
