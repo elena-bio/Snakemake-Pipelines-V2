@@ -204,7 +204,7 @@ usage command in bash script:
 # Execute your command (e.g., sorting sam to bam command)
 samtools sort output.bam -o sorted.bam
 ```
-i also chenged these commands in the bash script:
+i also changed these commands in the bash script:
 ```
 ###Output files
 #PBS -e sort_bam.err
@@ -219,8 +219,19 @@ Next, we need to use `samtools` again to index the sorted read alignments so tha
 samtools index sorted.bam
 ```
 1. Extract chromosome number 6
+   
+ usage command in bash script:   
+```
+# Execute your command (e.g., extracting chromosome6)
+samtools view -b sorted.bam chr6 > chromosome6.bam
 
- 
+```
+I also changed these command in the bash script:
+
+```
+#PBS -e extract_chr_bam.err
+#PBS -o extract_chr_bam.log
+```
 
 1. Runing PBHoney Tool for Variant Calling
    
