@@ -186,9 +186,7 @@ The task will run with the following inputs
    # Execute your command (e.g., minimap2 command)
    minimap2 -ax map-hifi GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta HG002_35x_PacBio_14kb-15kb.fastq.gz > output.sam
    
-   ```
-
-   
+   ```   
    
    usage command:
    ```
@@ -200,7 +198,6 @@ The task will run with the following inputs
    $ qstat -a; ll -h
 
    ```
-  
 
 1. **Converting sam file to bam file**
    The second rule converts a SAM file to a BAM file . To speeds up processing, saves space, and allows for quick access to specific data regions.
@@ -236,76 +233,77 @@ The task will run with the following inputs
 
 1. **Indexing read alignment**
 
-Next, we need to use `samtools` again to index the sorted read alignments so that we can quickly access reads by the genomic location they were mapped to. This can be done with the following command:
+   Next, we need to use `samtools` again to index the sorted read alignments so that we can quickly access reads by the genomic location they were mapped to. This can be done with the following command:
 
-```
-# Execute your command (e.g., indexing sorted bam file command)
-samtools index sorted.bam
-```
+   ```
+   # Execute your command (e.g., indexing sorted bam file command)
+   samtools index sorted.bam
+   ```
+   
 1. **Extract chromosome number 6**
    
- usage command in bash script:   
-```
-# Execute your command (e.g., extracting chromosome6)
-samtools view -b sorted.bam chr6 > chromosome6.bam
+   usage command in bash script:   
+   ```
+   # Execute your command (e.g., extracting chromosome6)
+   samtools view -b sorted.bam chr6 > chromosome6.bam
 
-```
-I also changed these command in the bash script:
+   ```
+   I also changed these command in the bash script:
 
-```
-#PBS -e extract_chr_bam.err
-#PBS -o extract_chr_bam.log
-```
+   ```
+   #PBS -e extract_chr_bam.err
+   #PBS -o extract_chr_bam.log
+   ```
 
 1. **Runing Sniffles Tool for Variant Calling**
    
-_Sniffles2_: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies. 
-   
-To call SVc from long read allignments PacBio and Oxford Nanopore read data you can use this command:
-```
-sniffles -i mapped_input.bam -v output.vcf
-```
-usage command in bash script:
-```
-#Execute your command (e.g., sniffle: A fast structural cariation caller for long-read sequencing data)
-sniffles -i chr6.bam -v output.vcf
-```
+   _Sniffles2_: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies. 
+      
+   To call SVc from long read allignments PacBio and Oxford Nanopore read data you can use this command:
+   ```
+   sniffles -i mapped_input.bam -v output.vcf
+   ```
+   usage command in bash script:
+   ```
+   #Execute your command (e.g., sniffle: A fast structural cariation caller for long-read sequencing data)
+   sniffles -i chr6.bam -v output.vcf
+   ```
 
-executed command:
-```
-$ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./sniffles.sh
-```
+   executed command:
+   ```
+   $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./sniffles.sh
+   ```
 
-**Installation**
-    
--  Use: `pip` with the command: `pip install sniffles`
--  Use: `conda` with the command:`conda install sniffles=2.4`
+   **Installation**
+      
+   -  Use: `pip` with the command: `pip install sniffles`
+   -  Use: `conda` with the command:`conda install sniffles=2.4`
 
-If Sniffles1 is already installed via `conda`, it can be upgraded to Sniffles2 with the following command:
- `conda update sniffles=2.4`
-    
-**Requirements**
-  ```
+   If Sniffles1 is already installed via `conda`, it can be upgraded to Sniffles2 with the following command:
+   `conda update sniffles=2.4`
+      
+   **Requirements**
+   ```
    name: sniffles_env
-channels:
-  - bioconda
-  - conda-forge
-  - defaults
-dependencies:
-  - python=3.10.12
-  - pysam=0.21.0
-  - edlib>=1.3.9
-  - psutil>=5.9.4
-  - pip  # To ensure pip is available for any additional installations
-  - pip:
-    - sniffles2-plot
+   channels:
+   - bioconda
+   - conda-forge
+   - defaults
+   dependencies:
+   - python=3.10.12
+   - pysam=0.21.0
+   - edlib>=1.3.9
+   - psutil>=5.9.4
+   - pip  # To ensure pip is available for any additional installations
+   - pip:
+     - sniffles2-plot
 
-# necessary requirement for snakemake
-  - snakemake
-  - samtools=1*
+   # necessary requirement for snakemake
+   - snakemake
+   - samtools=1*
 
-# minimap2 for allignment
-  - minimap2
+   # minimap2 for allignment
+   - minimap2
    ```
 
 1. **Runing Sniffles Tool to get sniffles plot**
@@ -317,41 +315,41 @@ dependencies:
    -  SV Size & Type Distribution
    -  Comparison of Length of Variants
 
-To install this package you can run the following command:
- `
- $ pip3 install sniffles2-plot
- `
+   To install this package you can run the following command:
+   ```
+   $ pip3 install sniffles2-plot
+   ```
 
-For running the program for multiple vcf files located in a specific directory:
- `
- $ python3 -m sniffles2_plot -i <VCF_files_folder>
- `
-   
-For running the program for single vcf file:
- `
+   For running the program for multiple vcf files located in a specific directory:
+   ```
+   $ python3 -m sniffles2_plot -i <VCF_files_folder>
+   ```
+      
+   For running the program for single vcf file:
+   ```
    $ python3 -m sniffles2_plot -i <file_name> -o <output_folder>
- `
+   ```
 
-usage command in bash script:
- `
-  #Execute your command (e.g., sniffles plots)
-  python3 -m sniffles2_plot -i output.vcf -o vcf.plots
- `
+   usage command in bash script:
+   ```
+   #Execute your command (e.g., sniffles plots)
+   python3 -m sniffles2_plot -i output.vcf -o vcf.plots
+   ```
 
-Executed command:
-`
-  $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./vcf_plots.sh
-`
+   Executed command:
+   ```
+   $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./vcf_plots.sh
+   ```
 
-To transfer files from the server to my local machine, I used the scp command as follows:
+   To transfer files from the server to my local machine, I used the scp command as follows:
 
-transfering the output.vcf file:
-  `
-  $ scp -r elehos@ssh.computerome.dk:/home/projects/cu_10160/people/elehos/Newdataset/output.vcf /home/elena
-  `
-transfering the vcf.plots directory: 
-  `
-  $ scp -r elehos@ssh.computerome.dk:/home/projects/cu_10160/people/elehos/Newdataset/vcf.plots /home/elena
-  `
+   transfering the output.vcf file:
+   ```
+   $ scp -r elehos@ssh.computerome.dk:/home/projects/cu_10160/people/elehos/Newdataset/output.vcf /home/elena
+   ```
+   transfering the vcf.plots directory: 
+   ```
+   $ scp -r elehos@ssh.computerome.dk:/home/projects/cu_10160/people/elehos/Newdataset/vcf.plots /home/elena
+   ```
   
 ### Runing PBHoney Tool for Variant Calling 
