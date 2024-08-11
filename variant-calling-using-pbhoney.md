@@ -202,37 +202,38 @@ The task will run with the following inputs
    ```
   
 
-
 1. **Converting sam file to bam file**
- The second rule converts a SAM file to a BAM file . To speeds up processing, saves space, and allows for quick access to specific data regions.
+   The second rule converts a SAM file to a BAM file . To speeds up processing, saves space, and allows for quick access to specific data regions.
 
-usage command in bash script:
+   usage command in bash script:
 
-```
-# Execute your command (e.g., converting sam to bam command)
-samtools view -Sb output.sam > output.bam
-```
-I also chenged these comands in the bash script: 
-```
-###Output files
-#PBS -e sam_bam.err
-#PBS -o sam_bam.log
-```
+   ```
+   # Execute your command (e.g., converting sam to bam command)
+   samtools view -Sb output.sam > output.bam
+   ```
+   I also chenged these comands in the bash script: 
+   ```
+   ###Output files
+   #PBS -e sam_bam.err
+   #PBS -o sam_bam.log
+   ```
+
 1. **Sorting read alignments**
    
-For later steps, we need the read alignments in the BAM files to be sorted. This can be achieved with the **samtools** `sort` command.
+   For later steps, we need the read alignments in the BAM files to be sorted. This can be achieved with the **samtools** `sort` command.
 
-usage command in bash script:
-```
-# Execute your command (e.g., sorting sam to bam command)
-samtools sort output.bam -o sorted.bam
-```
-i also changed these commands in the bash script:
-```
-###Output files
-#PBS -e sort_bam.err
-#PBS -o sort_bam.log
-```
+   usage command in bash script:
+   ```
+   # Execute your command (e.g., sorting sam to bam command)
+   samtools sort output.bam -o sorted.bam
+   ```
+   i also changed these commands in the bash script:
+   ```
+   ###Output files
+   #PBS -e sort_bam.err
+   #PBS -o sort_bam.log
+   ```
+
 1. **Indexing read alignment**
 
 Next, we need to use `samtools` again to index the sorted read alignments so that we can quickly access reads by the genomic location they were mapped to. This can be done with the following command:
@@ -261,21 +262,21 @@ I also changed these command in the bash script:
 _Sniffles2_: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies. 
    
 To call SVc from long read allignments PacBio and Oxford Nanopore read data you can use this command:
-`
+```
 sniffles -i mapped_input.bam -v output.vcf
-`
+```
 usage command in bash script:
-`
+```
 #Execute your command (e.g., sniffle: A fast structural cariation caller for long-read sequencing data)
 sniffles -i chr6.bam -v output.vcf
-`
+```
 
 executed command:
-`
+```
 $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./sniffles.sh
-`
+```
 
-   **Installation**
+**Installation**
     
 -  Use: `pip` with the command: `pip install sniffles`
 -  Use: `conda` with the command:`conda install sniffles=2.4`
@@ -283,7 +284,7 @@ $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:
 If Sniffles1 is already installed via `conda`, it can be upgraded to Sniffles2 with the following command:
  `conda update sniffles=2.4`
     
- **Requirements**
+**Requirements**
   ```
    name: sniffles_env
 channels:
