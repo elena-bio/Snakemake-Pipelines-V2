@@ -345,23 +345,12 @@ usage command in bash script:
  #Execute your command (e.g., sniffles plots)
 python3 -m sniffles2_plot -i output.vcf -o vcf.plots
  `
+
 Executed command:
 
 `
 qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./vcf_plots.sh
 `
-
-   
-  
-
-   
-
-
-
-
-
-   `
-   
 
    
 ### Runing PBHoney Tool for Variant Calling 
