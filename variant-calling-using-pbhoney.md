@@ -352,5 +352,16 @@ Executed command:
 qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./vcf_plots.sh
 `
 
-   
-### Runing PBHoney Tool for Variant Calling 
+To transfer files from the server to my local machine, I used the scp command as follows:
+
+ transfering the output.vcf file:
+
+  `
+  $ scp -r elehos@ssh.computerome.dk:/home/projects/cu_10160/people/elehos/Newdataset/output.vcf /home/elena
+
+  transfering the vcf.plots directory: 
+  `
+  $ scp -r elehos@ssh.computerome.dk:/home/projects/cu_10160/people/elehos/Newdataset/vcf.plots /home/elena
+  `
+  
+  ### Runing PBHoney Tool for Variant Calling 
