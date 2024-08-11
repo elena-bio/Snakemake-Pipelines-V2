@@ -233,7 +233,7 @@ i also changed these commands in the bash script:
 #PBS -e sort_bam.err
 #PBS -o sort_bam.log
 ```
-### Indexing read alignment 
+1. **Indexing read alignment**
 
 Next, we need to use `samtools` again to index the sorted read alignments so that we can quickly access reads by the genomic location they were mapped to. This can be done with the following command:
 
@@ -241,7 +241,7 @@ Next, we need to use `samtools` again to index the sorted read alignments so tha
 # Execute your command (e.g., indexing sorted bam file command)
 samtools index sorted.bam
 ```
-1. Extract chromosome number 6
+1. **Extract chromosome number 6**
    
  usage command in bash script:   
 ```
@@ -256,7 +256,7 @@ I also changed these command in the bash script:
 #PBS -o extract_chr_bam.log
 ```
 
-### Runing Sniffles Tool for Variant Calling
+1. **Runing Sniffles Tool for Variant Calling**
    
    __Sniffles2__: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies. 
    
@@ -264,21 +264,20 @@ To call SVc from long read allignments PacBio and Oxford Nanopore read data you 
 
 `
 sniffles -i mapped_input.bam -v output.vcf
-`
 
-usage$ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./sniffles.sh command in bash script:
+usage command in bash script:
 
 `
 #Execute your command (e.g., sniffle: A fast structural cariation caller for long-read sequencing data)
 
 sniffles -i chr6.bam -v output.vcf
 `
+
 executed command:
 
 `
 $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./sniffles.sh
 `
-
 
    **Installation**
     
@@ -312,6 +311,57 @@ dependencies:
 # minimap2 for allignment
   - minimap2
    ```
-    
+
+1. **Runing Sniffles Tool to get sniffles plot**
+   
+   The Sniffle Plot is a Python program that generates plots for single and multi-sample VCF files.
+
+   -  Variant Frequency Spectrum
+   -  Genotype Frequency
+   -  SV Size & Type Distribution
+   -  Comparison of Length of Variants
+
+To install this package you can run the following command:
+
+ `
+ $ pip3 install sniffles2-plot
+ `
+
+For running the program for multiple vcf files located in a specific directory:
+
+ `
+ $ python3 -m sniffles2_plot -i <VCF_files_folder>
+ `
+   
+For running the program for single vcf file:
+
+ `
+   $ python3 -m sniffles2_plot -i <file_name> -o <output_folder>
+ `
+
+usage command in bash script:
+
+ `
+ #Execute your command (e.g., sniffles plots)
+python3 -m sniffles2_plot -i output.vcf -o vcf.plots
+ `
+Executed command:
+
+`
+qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./vcf_plots.sh
+`
+
+   
+  
+
+   
+
+
+
+
+
+   `
+   
+
    
 ### Runing PBHoney Tool for Variant Calling 
