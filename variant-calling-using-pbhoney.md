@@ -188,7 +188,7 @@ The task will run with the following inputs
    
    ```
 
-   $ qsub -W group_list=<group_name_found_in_step#1> -A <group_name_found_in_step#1> -l nodes=1:ppn=1,mem=4gb, walltime=01:00:00 <your script>`
+   
    
    usage command:
    ```
@@ -259,7 +259,17 @@ I also changed these command in the bash script:
 ### Runing Sniffles Tool for Variant Calling
    
    __Sniffles2__: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies. 
-   
+To call SVc from long read allignments PacBio and Oxford Nanopore read data you can used this command:
+
+`
+sniffles -i mapped_input.bam -v output.vcf
+`
+usage command in bash script:
+
+`
+#Execute your command (e.g., sniffles plots)
+python3 -m sniffles2_plot -i output.vcf -o vcf.plots
+`   
    **Installation**
     
 -  Use: `pip` with the command: `pip install sniffles`
