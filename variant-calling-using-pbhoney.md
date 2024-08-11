@@ -258,12 +258,12 @@ I also changed these command in the bash script:
 
 ### Runing Sniffles Tool for Variant Calling
    
-   __Sniffles2__: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies.
+   __Sniffles2__: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies. 
+   
+   **Installation**
     
-    **Installation**
-    
-- ● Use `pip` with the command: `pip install sniffles`
-- ● Use `conda` with the command:`conda install sniffles=2.4`
+-  Use: `pip` with the command: `pip install sniffles`
+-  Use: `conda` with the command:`conda install sniffles=2.4`
 
 If Sniffles1 is already installed via `conda`, it can be upgraded to Sniffles2 with the following command:
 
