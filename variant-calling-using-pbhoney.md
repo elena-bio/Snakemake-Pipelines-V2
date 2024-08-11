@@ -40,13 +40,17 @@ $cd /home/projects/cu_10160/people/elehos
 
 ## Environment setup
 
-1. **Set up a dedicated Conda environment for PBHoney**: Creating a separate Conda environment ensures that the dependencies and packages required for PBHoney do not conflict with other tools or projects on the system
+1. **Set up  dedicated Conda environments for PBHoney and Sniffles**: Creating a separate Conda environments ensures that the dependencies and packages required for PBHoney and sniffles do not conflict with other tools or projects on the system
 
    ```
    $ conda create -n pbhoney-env python=2.7.15
    ```
-
+   ```
+  $ conda create -n sniffles_env
+   ```
 1. **Activate the environment**
+   
+usage command:
 
    `$ conda activate pbhoney-env`
 
