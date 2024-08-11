@@ -46,15 +46,24 @@ $cd /home/projects/cu_10160/people/elehos
    $ conda create -n pbhoney-env python=2.7.15
    ```
    ```
-  $ conda create -n sniffles_env
+   $ conda create -n sniffles_env
    ```
+ 
 1. **Activate the environment**
    
 usage command:
 
    `$ conda activate pbhoney-env`
 
-1. **Create the environment.yaml file**: Specify the configuration of a Conda environment, including packages and dependencies.
+1. 1. **Create the environment.yaml file**: Specify the configuration of a Conda environment, including packages and dependencies.
+
+- In the working directory, create new files called `sniffles_env.yaml` and pbhoney_env.yaml with an editor of your choice.
+
+```
+gedit sniffles_env.yaml
+```
+
+
    ```yaml
    channels:
    - conda-forge
