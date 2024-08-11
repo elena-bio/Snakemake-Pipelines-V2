@@ -269,10 +269,9 @@ If Sniffles1 is already installed via `conda`, it can be upgraded to Sniffles2 w
 
 - `conda update sniffles=2.4`
     
-    **Requirements**
-    
-   ```
-name: sniffles_env
+ **Requirements**
+  ```
+   name: sniffles_env
 channels:
   - bioconda
   - conda-forge
@@ -285,9 +284,14 @@ dependencies:
   - pip  # To ensure pip is available for any additional installations
   - pip:
     - sniffles2-plot
-   
-  - minimap2
-  - samtools=1*
-  ```
 
+# necessary requirement for snakemake
+  - snakemake
+  - samtools=1*
+
+# minimap2 for allignment
+  - minimap2
+   ```
+    
+   
 ### Runing PBHoney Tool for Variant Calling 
