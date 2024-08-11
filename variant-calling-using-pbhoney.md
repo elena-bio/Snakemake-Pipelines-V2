@@ -261,20 +261,16 @@ I also changed these command in the bash script:
    __Sniffles2__: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies. 
    
 To call SVc from long read allignments PacBio and Oxford Nanopore read data you can used this command:
-
 `
 sniffles -i mapped_input.bam -v output.vcf
 
 usage command in bash script:
-
 `
 #Execute your command (e.g., sniffle: A fast structural cariation caller for long-read sequencing data)
 
 sniffles -i chr6.bam -v output.vcf
 `
-
 executed command:
-
 `
 $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./sniffles.sh
 `
@@ -285,8 +281,7 @@ $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:
 -  Use: `conda` with the command:`conda install sniffles=2.4`
 
 If Sniffles1 is already installed via `conda`, it can be upgraded to Sniffles2 with the following command:
-
-- `conda update sniffles=2.4`
+ `conda update sniffles=2.4`
     
  **Requirements**
   ```
@@ -322,32 +317,27 @@ dependencies:
    -  Comparison of Length of Variants
 
 To install this package you can run the following command:
-
  `
  $ pip3 install sniffles2-plot
  `
 
 For running the program for multiple vcf files located in a specific directory:
-
  `
  $ python3 -m sniffles2_plot -i <VCF_files_folder>
  `
    
 For running the program for single vcf file:
-
  `
    $ python3 -m sniffles2_plot -i <file_name> -o <output_folder>
  `
 
 usage command in bash script:
-
  `
  #Execute your command (e.g., sniffles plots)
 python3 -m sniffles2_plot -i output.vcf -o vcf.plots
  `
 
 Executed command:
-
 `
 qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./vcf_plots.sh
 `
@@ -355,10 +345,9 @@ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00
 To transfer files from the server to my local machine, I used the scp command as follows:
 
  transfering the output.vcf file:
-
   `
   $ scp -r elehos@ssh.computerome.dk:/home/projects/cu_10160/people/elehos/Newdataset/output.vcf /home/elena
-
+  `
   transfering the vcf.plots directory: 
   `
   $ scp -r elehos@ssh.computerome.dk:/home/projects/cu_10160/people/elehos/Newdataset/vcf.plots /home/elena
