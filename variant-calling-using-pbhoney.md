@@ -62,6 +62,9 @@ usage command:
 ```
 gedit sniffles_env.yaml
 ```
+```
+gedit pbhoney_env.yaml
+```
 
 
    ```yaml
@@ -253,6 +256,37 @@ I also changed these command in the bash script:
 #PBS -o extract_chr_bam.log
 ```
 
-1. Runing PBHoney Tool for Variant Calling
+### Runing Sniffles Tool for Variant Calling
    
-1. Runing Sniffles Tool for Variant Calling 
+   __Sniffles2__: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies.
+    
+    **Installation**
+    
+- ● Use `pip` with the command: `pip install sniffles`
+- ● Use `conda` with the command:`conda install sniffles=2.4`
+
+If Sniffles1 is already installed via `conda`, it can be upgraded to Sniffles2 with the following command:
+
+- `conda update sniffles=2.4`
+    
+    **Requirements**
+    
+   ```
+name: sniffles_env
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10.12
+  - pysam=0.21.0
+  - edlib>=1.3.9
+  - psutil>=5.9.4
+  - pip  # To ensure pip is available for any additional installations
+  - pip:
+    - sniffles2-plot
+ <!-- minimap2 for allignment
+  - minimap2
+  - samtools=1*
+  ``` 
+### Runing PBHoney Tool for Variant Calling 
