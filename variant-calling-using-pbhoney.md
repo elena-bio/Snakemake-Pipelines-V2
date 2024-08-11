@@ -285,8 +285,9 @@ dependencies:
   - pip  # To ensure pip is available for any additional installations
   - pip:
     - sniffles2-plot
- <!-- minimap2 for allignment
+   
   - minimap2
   - samtools=1*
-  ``` 
+  ```
+
 ### Runing PBHoney Tool for Variant Calling 
