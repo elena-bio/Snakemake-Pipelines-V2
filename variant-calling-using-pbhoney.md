@@ -258,18 +258,18 @@ I also changed these command in the bash script:
 
 1. **Runing Sniffles Tool for Variant Calling**
    
-   __Sniffles2__: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies. 
+_Sniffles2_: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies. 
    
-To call SVc from long read allignments PacBio and Oxford Nanopore read data you can used this command:
+To call SVc from long read allignments PacBio and Oxford Nanopore read data you can use this command:
 `
 sniffles -i mapped_input.bam -v output.vcf
-
+`
 usage command in bash script:
 `
 #Execute your command (e.g., sniffle: A fast structural cariation caller for long-read sequencing data)
-
 sniffles -i chr6.bam -v output.vcf
 `
+
 executed command:
 `
 $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./sniffles.sh
@@ -333,24 +333,24 @@ For running the program for single vcf file:
 
 usage command in bash script:
  `
- #Execute your command (e.g., sniffles plots)
-python3 -m sniffles2_plot -i output.vcf -o vcf.plots
+  #Execute your command (e.g., sniffles plots)
+  python3 -m sniffles2_plot -i output.vcf -o vcf.plots
  `
 
 Executed command:
 `
-qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./vcf_plots.sh
+  $ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./vcf_plots.sh
 `
 
 To transfer files from the server to my local machine, I used the scp command as follows:
 
- transfering the output.vcf file:
+transfering the output.vcf file:
   `
   $ scp -r elehos@ssh.computerome.dk:/home/projects/cu_10160/people/elehos/Newdataset/output.vcf /home/elena
   `
-  transfering the vcf.plots directory: 
+transfering the vcf.plots directory: 
   `
   $ scp -r elehos@ssh.computerome.dk:/home/projects/cu_10160/people/elehos/Newdataset/vcf.plots /home/elena
   `
   
-  ### Runing PBHoney Tool for Variant Calling 
+### Runing PBHoney Tool for Variant Calling 
