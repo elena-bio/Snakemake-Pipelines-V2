@@ -259,17 +259,27 @@ I also changed these command in the bash script:
 ### Runing Sniffles Tool for Variant Calling
    
    __Sniffles2__: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies. 
+   
 To call SVc from long read allignments PacBio and Oxford Nanopore read data you can used this command:
 
 `
 sniffles -i mapped_input.bam -v output.vcf
 `
-usage command in bash script:
+
+usage$ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./sniffles.sh command in bash script:
 
 `
-#Execute your command (e.g., sniffles plots)
-python3 -m sniffles2_plot -i output.vcf -o vcf.plots
-`   
+#Execute your command (e.g., sniffle: A fast structural cariation caller for long-read sequencing data)
+
+sniffles -i chr6.bam -v output.vcf
+`
+executed command:
+
+`
+$ qsub -W group_list=cu_10160 -A cu_10160 -l nodes=1:ppn=8,mem=40gb,walltime=12:00:00 ./sniffles.sh
+`
+
+
    **Installation**
     
 -  Use: `pip` with the command: `pip install sniffles`
