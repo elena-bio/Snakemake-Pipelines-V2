@@ -325,6 +325,7 @@ If Sniffles1 is already installed via `conda`, it can be upgraded to Sniffles2 w
    ```
 In the following rule I used sniffles to generate vcf file :
 
+```
 rule sniffles_call:
     input:
         bam="outputs/sorted.chromosome6.bam",
@@ -333,7 +334,8 @@ rule sniffles_call:
         "outputs/chr6.vcf"
     shell:
         "sniffles -i {input.bam} -v {output}"
-   
+```
+
 
 
 ### Runing pbhoney for variant calling 
