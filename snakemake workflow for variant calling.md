@@ -74,9 +74,6 @@ usage command
 rule all:
     input:
         "outputs/output.sam"
-
-rule minimap2:
-```
     input:
         HGOO2="HG002_35x_PacBio_14kb-15kb.fastq.gz" 
     output:
