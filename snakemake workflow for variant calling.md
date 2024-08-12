@@ -79,7 +79,7 @@ rule all:
     output:
         "outputs/output.sam"
     params:
-        ref="GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.f$
+        ref="GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta"
     shell:
         "minimap2 -ax map-hifi {params.ref} {input.HGOO2} > {output}"   
 
