@@ -76,13 +76,15 @@ rule all:
         "outputs/output.sam"
 
 rule minimap2:
+```
     input:
-        HGOO2="HG002_35x_PacBio_14kb-15kb.fastq.gz",
-        ref="GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta"
+        HGOO2="HG002_35x_PacBio_14kb-15kb.fastq.gz" 
     output:
         "outputs/output.sam"
+    params:
+        ref="GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.f$
     shell:
-        "minimap2 -ax map-hifi {input.ref} {input.HGOO2} > {output}"
+        "minimap2 -ax map-hifi {params.ref} {input.HGOO2} > {output}"   
 
 ```
 
