@@ -288,7 +288,52 @@ rule samtools_extract:
 
 ```
 
-### Runing sniffles for variant calling
+### Runing sniffles for variant calling 
+
+Sniffles2: A rapid and accurate structural variant caller designed for long-read sequencing. Sniffles2 efficiently detects structural variants (SVs) across germline, somatic, and population-level studies using data from PacBio and Oxford Nanopore technologies.
+
+**Installation**
+
+- Use: `pip` with the command: `pip install sniffles`
+- Use: `conda` with the command:`conda install sniffles=2.4`
+
+If Sniffles1 is already installed via `conda`, it can be upgraded to Sniffles2 with the following command:
+   `conda update sniffles=2.4`
+
+**Requirements**
+```
+   name: snakemake_env
+   channels:
+   - bioconda
+   - conda-forge
+   - defaults
+   dependencies:
+   - python=3.10.12
+   - pysam=0.21.0
+   - edlib>=1.3.9
+   - psutil>=5.9.4
+   - pip  # To ensure pip is available for any additional installations
+   - pip:
+     - sniffles2-plot
+
+   # necessary requirement for snakemake
+   - snakemake
+   - samtools=1*
+
+   # minimap2 for allignment
+   - minimap2
+   ```
+In the following rule I used sniffles to generate vcf file :
+
+rule sniffles_call:
+    input:
+        bam="outputs/sorted.chromosome6.bam",
+        bai="outputs/sorted.chromosome6.bam.bai"
+    output:
+        "outputs/chr6.vcf"
+    shell:
+        "sniffles -i {input.bam} -v {output}"
+   
 
 
 ### Runing pbhoney for variant calling 
