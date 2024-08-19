@@ -352,4 +352,57 @@ The task will run with the following inputs
    $ scp -r elehos@ssh.computerome.dk:/home/projects/cu_10160/people/elehos/Newdataset/vcf.plots /home/elena
    ```
   
-### Runing PBHoney Tool for Variant Calling 
+1. **Runing PBHoney Tool for Variant Calling**
+
+     PBHoney is an implementation of two variant-identification approaches designed to exploit the high mappability of large reads(i.e.,greater than 10,000bp). PBHoney considers both intra-read discordance and soft-clipped tails of long reads to identify structural variants.
+     Beqining with a bam with mapped PacBio reads, I will use Honey.py to execute the stages `pie`, `tails`, `spots`.
+
+     - Honey.py pie
+       Map reads using blassr(optional)and then extract the soft-clipped tails and attempt to remap them.
+
+     - Honey.py tails
+       cluster the tail-mapping information to make genomic breakpoints
+
+     - Honey.py spots
+       Look for genomic variants whithin the span of reads.
+
+     - Honey.py force 
+       Look for read evidence to support a predicted structural variant.
+
+     - Honey.py asm
+       Assemble reads around a structural variant and map the contigs back to 
+       the provided reference.
+
+     - Honey.py cpxres (beta)
+       Given a set of breakpoints from tails, trace the breaks to resolve
+       the full variant structure.
+
+     *Pie Details*
+     ```
+     > Honey.py pie inputReads.fastq reference.fasta
+     ```
+     Pie is a wrapper around blasr that allows you to start from filtered subreads
+     If you specify your input as fasta|fastq|fofn files, Pie will perform
+     the primary alignments of your reads. Recommended parameters are built
+     into the defualts, but you can customize them as needed.
+
+     Next, pie will extract  unmapped, soft-clipped tails.Either the .sam/bam created in step one or if you specify your input to be a .sam/bam file, some number of your reads will have unmapped, soft-clipped tails. Pie will extract those tails, remap them, and then create a consolidated .sam/bam.
+
+     *Usage command*
+
+   
+     
+
+
+
+
+
+
+
+
+
+     **Installation**
+
+
+   **Requirements**
+     
